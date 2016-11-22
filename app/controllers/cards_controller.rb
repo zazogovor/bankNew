@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   # GET /cards.json
   def index
 	@cards = []
-    @accounts = @current_customer.accounts	#without this line, even though i know it shoudlnt be here, it throws a nil error for 'each'
+	@accounts = @current_customer.accounts
 	@accounts.each do |account|
 		account.cards.each do |card|
 			@cards << card                    #this stores each 'card' in @cards

@@ -4,7 +4,13 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.all
+	@transactions = []
+	@accounts = @current_customer.accounts
+	@accounts.each do |account|
+		account.transactions.each do |transaction|
+			@transactions << transaction
+		end
+	end
   end
 
   # GET /transactions/1
@@ -25,6 +31,7 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+	processTransaction @transaction.account_id, @transaction.transferee_id, @transaction.amount
 
     respond_to do |format|
       if @transaction.save
