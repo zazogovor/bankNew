@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<div class = "html">
+	<div class = "container">
+		<div class = "jumbotron">
+			<h1>Welcome to </h1>
+			<h1>Sebas's Investments!</h1>
+		</div>
+		<div class = "container-fluid text-center">
+			<h1>About us</h1>
+			<p>Sebas's Investments was set up in 2016, in order to take advantage of holes in the Irish banking system.</p>
+			<p>We make sure to abuse our customers' stupidity. </p>
+		</div>
+		<div class = "container-fluid text-center">
+			<% if !signed_in? %>
+				<a href = "/customers/new" class = "btn btn-default btn-lg" role = "register">
+					Register
+				</a>
+				<a href = "/login" class = "btn btn-default btn-lg" role = "login">
+					Login
+				</a>
+			<% end %>
+		</div>
+	</div>
+</div>

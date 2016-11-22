@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<p id="notice"><%= notice %></p>
+
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<strong>Transaction details:</strong>
+					</div>
+
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<tbody>
+									<tr>
+										<td><strong>Account:</strong></td>
+										<td><%= @transaction.account.customer.firstname %>
+											<%= @transaction.account.customer.lastname %></td>
+									</tr>
+									<tr>
+										<td><strong>Transferee:</strong></td>
+										<td><%= @transaction.transferAccount.customer.firstname %>
+											<%= @transaction.transferAccount.customer.lastname %></td>
+									</tr>
+									<tr>
+										<td><strong>Amount:</strong></td>
+										<td><%= euro @transaction.amount %></td>
+									</tr>
+							  </tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+		<%= link_to 'Back', transactions_path %>
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<strong>Transactions to your accounts</strong>
+					</div>
+
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<thead>
+								<tr>
+									<th>Transaction ID</th>
+									<th>Account</th>
+									<th>Transferee</th>
+									<th>Amount</th>
+									<th colspan="1"></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<% @transactions.each do |transaction| %>
+									<tr>
+										<td><%= transaction.id %></td>
+										<td><%= transaction.account_id %></td>
+										<td><%= transaction.transferee_id %></td>
+										<td><%= euro transaction.amount %></td>
+										<td><%= link_to 'Show', transaction %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+		<%= link_to 'New Transaction', new_transaction_path %>
+	</div>
+
+</body>
+</html>

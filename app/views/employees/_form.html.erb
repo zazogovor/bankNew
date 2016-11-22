@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<%= bootstrap_form_for(@employee) do |f| %>
+	  <% if @employee.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+		  <ul>
+		  <% @employee.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		  <% end %>
+		  </ul>
+		</div>
+	  <% end %>
+
+		<div class = "container-fluid">
+			<div class ="row">
+				<div class="col-md-3">
+						
+					<%= f.text_field :firstname %>
+					<%= f.text_field :middlename %>
+					<%= f.text_field :lastname %>
+					<%= f.date_select :date_of_birth %>
+					<%= f.text_field :email %>
+					<%= f.password_field :password %>
+					<%= f.password_field :password_confirmation %>
+					<div class="actions">
+						<%= f.submit %>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<% end %>
+
+</body>
+</html>

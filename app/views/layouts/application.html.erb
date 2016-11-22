@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bank</title>
+	<%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	<%= csrf_meta_tags %>
+</head>
+<body>
+
+	<div id = "banner">
+		<%=image_tag("banner.jpg", :size => "100%")%>
+		<!-- <%= "Sebas's investments" %> -->
+	</div>
+
+	<nav class="navbar navbar-default">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" <%= link_to "Home", root_path %></a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+			<!-- <li><%= link_to "Home", root_path %></li> -->
+			<!-- <li><%= link_to "About us", pages_about_path %></li> -->
+			<% if !signed_in? %>
+				<li><%= link_to "Register", new_customer_path %></li>
+				<li><%= link_to "Login", login_path %></li>
+			<% elsif employeesigned_in? %>
+				<li><a>Logged in as <%= @current_employee.firstname %> <%= @current_employee.middlename %> 
+				<%= @current_employee.lastname %></a>
+				</li>
+				<li><%= link_to "Log out", employeelogout_path %></li>
+			<% else %>
+				<li><a>Logged in as <%= @current_customer.firstname %> <%= @current_customer.middlename %> 
+				<%= @current_customer.lastname %></a>
+				</li>
+				<li><%= link_to "Log out", logout_path %></li>
+			<% end %>
+			<li><%= mail_to "c12437908@mydit.ie", "Contact us" %></li>
+			</br>
+			<% if signed_in? %>
+				<li><%= link_to "Your details", @current_customer %></li>
+				<li><%= link_to "Accounts", accounts_path %></li>
+				<li><%= link_to "Cards", cards_path %></li>
+				<li><%= link_to "Transactions", transactions_path %></li>
+			<% end %>
+		  </ul>
+		</div><!-- /.navbar-collapse -->
+	  </div><!-- /.container-fluid -->
+	</nav>
+	
+	<% if !flash.nil? %>
+		<% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+		<% end %>
+	<% end %>
+
+	<%= yield %>
+	
+	<nav class="navbar navbar-default navbar-fixed-bottom">
+		<div class="container">
+			<footer class="container-fluid text-center">
+				<a href="#" title="To Top">
+					<span class="glyphicon glyphicon-chevron-up"></span>
+				</a>
+				<p>Website made by Sebastian Kotlarski</p>
+				<a href="http://www.github.com/zazogovor/" title="Visit my github page">http://www.github.com/zazogovor/</a>
+			</footer>
+		</div>
+	</nav>
+</body>
+</html>

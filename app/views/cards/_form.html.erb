@@ -1,0 +1,32 @@
+<%= bootstrap_form_for(@card) do |f| %>
+  <% if @card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card.errors.count, "error") %> prohibited this card from being saved:</h2>
+
+      <ul>
+      <% @card.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+	
+	<div class = "container">
+		<div class ="row">
+			<div class="col-md-2">
+					
+				<%= f.collection_select :account_id, @current_customer.accounts, :id, :id %>
+				<%= f.text_field :firstname %>
+				<%= f.text_field :middlename %>
+				<%= f.text_field :lastname %>
+				
+				<!-- Plan was to generate a 'due date' that is 5 years from Sys.date -->
+				<%= f.date_select :due_date, { :include_blank => false, :start_year => Date.today.year+5 } %>
+				<%= f.number_field :security_number, placeholder: '123456' %>
+				<div class="actions">
+					<%= f.submit %>
+				</div>
+			</div>
+		</div>
+	</div>
+<% end %>

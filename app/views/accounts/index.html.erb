@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class="col-md-6">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<strong>Your accounts</strong>
+					</div>
+
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<thead>
+								<tr>
+									<th>Account number</th>
+									<th>Account type</th>
+									<th>Balance</th>
+									<th colspan="3"></th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<% @accounts.each do |account| %>
+									<tr>
+										<td><%= account.id %></td>
+										<td><%= account.account_type %></td>
+										<td><%= euro account.balance %></td>
+										<td><%= link_to 'Show', account %></td>
+										<td><%= link_to 'Edit', edit_account_path(account) %></td>
+										<td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<%= link_to 'New Account', new_account_path %>
+	</div>
+
+</body>
+</html>
+
+<!-- Trying to show all details of an account based on dopbox input -->
+<!-- Need to make a JavaScript script for this to work -->
+<!--
+<%= form_for(@current_customer) do |f| %>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="field">
+				<strong>Account number:</strong>
+				<%= f.collection_select :id, @current_customer.accounts, :id, :id%>
+				<strong>Account type:</strong>
+				<%= content_tag('span', "", id: 'AccountType') %>
+			</div>
+		</div>
+		<table class="table">
+			<thead>
+				<tr>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<% @accounts.each do |account| %>
+					<tr>
+						<td><%= account.id %></td>
+						<td><%= account.account_type %></td>
+						<td><%= euro account.balance %></td>
+						<td><%= link_to 'Show', account %></td>
+						<td><%= link_to 'Edit', edit_account_path(account) %></td>
+						<td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+<% end %>
+-->
+

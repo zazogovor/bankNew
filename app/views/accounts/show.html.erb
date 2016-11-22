@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<p id="notice"><%= notice %></p>
+
+	<div class = "container-fluid">
+		<div class ="row">
+			<div class="col-md-3">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<strong>Account details:</strong>
+					</div>
+
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<tbody>
+								<tr>
+									<td><strong>Customer number:</strong></td>
+									<td><%= @account.customer_id %></td>
+								</tr>
+								<tr>
+									<td><strong>Account number:</strong></td>
+									<td><%= @account.id %></td>
+								</tr>
+								<tr>
+									<td><strong>Account type:</strong></td>
+									<td><%= @account.account_type %></td>
+								</tr>
+								<tr>
+									<td><strong>Balance:</strong></td>
+									<td><%= euro @account.balance %></td>
+								</tr>
+							</tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class ="row">
+			<div class="col-md-8">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<div class="field">
+							<strong>Cards:</strong>
+						</div>
+					</div>
+					
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<thead>
+								<tr>
+									<th>Card Number</th>
+									<th>Firstname</th>
+									<th>Middlename</th>
+									<th>Lastname</th>
+									<th>Due date</th>
+									<th>Security number</th>
+									<th colspan="3"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @account.cards.each do |card| %>
+									<tr>
+										<td><%= card.id %></td>
+										<td><%= card.firstname %></td>
+										<td><%= card.middlename %></td>
+										<td><%= card.lastname %></td>
+										<td><%= card.due_date %></td>
+										<td><%= card.security_number %></td>
+										<td><%= link_to 'Show', card %></td>
+										<td><%= link_to 'Edit', edit_card_path(card) %></td>
+										<td><%= link_to 'Destroy', card, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class ="row">
+			<div class="col-md-5">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<div class="field">
+							<strong>Transactions:</strong>
+						</div>
+					</div>
+					
+					<!-- Table -->
+					<table class="table">
+						<table style="width:100%">
+							<thead>
+								<tr>
+									<th>Transaction ID</th>
+									<th>Account</th>
+									<th>Transferee</th>
+									<th>Amount</th>
+									<th colspan="1"></th>
+								</tr>
+							</thead>
+							<tbody>
+								<% @account.transactions.each do |transaction| %>
+									<tr>
+										<td><%= transaction.id %></td>
+										<td><%= transaction.account_id %></td>
+										<td><%= transaction.transferee_id %></td>
+										<td><%= euro transaction.amount %></td>
+										<td><%= link_to 'Show', transaction %></td>
+									</tr>
+								<% end %>
+							</tbody>
+						</table>
+					</table>
+				</div>
+			</div>
+		</div>
+		<%= link_to 'New Card', new_card_path %> |
+		<%= link_to 'New Transaction', new_transaction_path %> |
+		<%= link_to 'Edit', edit_account_path(@account) %> |
+		<%= link_to 'Back', accounts_path %>
+	</div>
+
+</body>
+</html>

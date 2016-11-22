@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+	<%= bootstrap_form_for(@transaction) do |f| %>
+	  <% if @transaction.errors.any? %>
+		<div id="error_explanation">
+		  <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+		  <ul>
+		  <% @transaction.errors.full_messages.each do |message| %>
+			<li><%= message %></li>
+		  <% end %>
+		  </ul>
+		</div>
+	  <% end %>
+		
+		<div class = "container-fluid">
+			<div class ="row">
+				<div class="col-md-2">
+						
+					<div class="field">
+						<%= f.collection_select :account_id, @current_customer.accounts, :id, :id %>
+					</div>
+					<div class="field">
+						<%= f.collection_select :transferee_id, Account.all, :id, :id %>
+					</div>
+					<div class="field">
+						<%= f.text_field :amount %>
+					</div>
+					<div class="actions">
+						<%= f.submit %>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
+
+</body>
+</html>
