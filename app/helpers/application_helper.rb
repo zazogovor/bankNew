@@ -36,10 +36,10 @@ module ApplicationHelper
 	end
 	
 	def processTransaction(sender, receiver, amount)
-		@senderAccount = Account.find_by_id(params[:sender])
-		@receiverAccount = Account.find_by_id(params[:receiver])
+		senderAccount = Account.find_by_id(sender)
+		receiverAccount = Account.find_by_id(receiver)
 		
-		@senderAccount.balance = @senderAccount.balance - amount
-		@receiverAccount.balance = @receiverAccount.balance + amount
+		senderAccount.balance -= amount
+		receiverAccount.balance += amount
 	end
 end

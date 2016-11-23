@@ -29,20 +29,21 @@ class TransactionsController < ApplicationController
 
   # POST /transactions
   # POST /transactions.json
-  def create
-    @transaction = Transaction.new(transaction_params)
-	processTransaction @transaction.account_id, @transaction.transferee_id, @transaction.amount
+	def create
+		@transaction = Transaction.new(transaction_params)
 
-    respond_to do |format|
-      if @transaction.save
-        format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
-        format.json { render :show, status: :created, location: @transaction }
-      else
-        format.html { render :new }
-        format.json { render json: @transaction.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+		respond_to do |format|
+		  if @transaction.save
+			format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
+			format.json { render :show, status: :created, location: @transaction }
+		  else
+			format.html { render :new }
+			format.json { render json: @transaction.errors, status: :unprocessable_entity }
+		  end
+		end
+		
+		processTransaction(@transaction.account_id, @transaction.transferee_id, @transaction.amount)
+	end
 
   # PATCH/PUT /transactions/1
   # PATCH/PUT /transactions/1.json

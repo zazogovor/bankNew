@@ -31,6 +31,7 @@ class AccountsController < ApplicationController
   # POST /accounts.json
   def create
     @account = Account.new(account_params)
+	@account.customer_id = @current_customer.id
 
     respond_to do |format|
       if @account.save
