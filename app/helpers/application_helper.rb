@@ -35,11 +35,5 @@ module ApplicationHelper
 		number_to_currency(amount, :unit => '€')
 	end
 	
-	def processTransaction(sender, receiver, amount)
-		senderAccount = Account.find_by_id(sender)
-		receiverAccount = Account.find_by_id(receiver)
-		
-		senderAccount.balance -= amount
-		receiverAccount.balance += amount
-	end
+	
 end

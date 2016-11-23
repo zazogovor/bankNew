@@ -4,7 +4,7 @@
 
 	<div class = "container-fluid">
 		<div class ="row">
-			<div class="col-md-5">
+			<div class="col-md-6">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
 					<div class="panel-heading">
@@ -17,6 +17,7 @@
 							<thead>
 								<tr>
 									<th>Transaction ID</th>
+									<th>Transaction Date</th>
 									<th>Account</th>
 									<th>Transferee</th>
 									<th>Amount</th>
@@ -28,6 +29,7 @@
 								<% @transactions.each do |transaction| %>
 									<tr>
 										<td><%= transaction.id %></td>
+										<td><%= transaction.created_at.strftime("%d %b. %Y") %>
 										<td><%= transaction.account_id %></td>
 										<td><%= transaction.transferee_id %></td>
 										<td><%= euro transaction.amount %></td>

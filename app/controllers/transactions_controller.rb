@@ -1,31 +1,44 @@
 class TransactionsController < ApplicationController
+
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :authorise
   # GET /transactions
   # GET /transactions.json
-  def index
-	@transactions = []
-	@accounts = @current_customer.accounts
-	@accounts.each do |account|
-		account.transactions.each do |transaction|
-			@transactions << transaction
+	def index
+		@transactions = []
+		@accounts = @current_customer.accounts
+		@accounts.each do |account|
+			account.transactions.each do |transaction|
+				@transactions << transaction
+			end
 		end
+		
+		@transactions.sort!
 	end
-  end
 
   # GET /transactions/1
   # GET /transactions/1.json
-  def show
-  end
+	def show
+	end
 
   # GET /transactions/new
-  def new
-    @transaction = Transaction.new
-  end
+	def new
+		@transaction = Transaction.new
+	end
 
   # GET /transactions/1/edit
-  def edit
-  end
+	def edit
+	end
+  
+	#Method to process a transaction in the database
+	#It is meant to deduct the transaction amount from sender, and add the amount to receiver
+	def processTransaction(sender, receiver, amount)
+		senderAccount = Account.find_by_id(sender)
+		receiverAccount = Account.find_by_id(receiver)
+		
+		senderAccount.balance -= amount
+		receiverAccount.balance += amount
+	end
 
   # POST /transactions
   # POST /transactions.json

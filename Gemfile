@@ -4,6 +4,7 @@ gem 'coffee-script-source','1.8.0'
 gem 'bootstrap-sass', '~> 3.3.1'
 gem 'bootstrap-datepicker-rails'
 gem 'bootstrap_form'
+gem 'geocoder'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.8'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161120150909) do
+ActiveRecord::Schema.define(version: 20161123164700) do
 
   create_table "accounts", force: true do |t|
     t.string   "account_type"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20161120150909) do
     t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "employees", force: true do |t|
