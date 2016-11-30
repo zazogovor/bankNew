@@ -30,14 +30,16 @@
 		  <ul class="nav navbar-nav">
 			<!-- <li><%= link_to "Home", root_path %></li> -->
 			<!-- <li><%= link_to "About us", pages_about_path %></li> -->
-			<% if !signed_in? %>
-				<li><%= link_to "Register", new_customer_path %></li>
-				<li><%= link_to "Login", login_path %></li>
-			<% elsif employeesigned_in? %>
+			
+			<% if employeesigned_in? %>
 				<li><a>Logged in as <%= @current_employee.firstname %> <%= @current_employee.middlename %> 
 				<%= @current_employee.lastname %></a>
 				</li>
 				<li><%= link_to "Log out", employeelogout_path %></li>
+			<% elsif !signed_in? %>
+				<li><%= link_to "Register", new_customer_path %></li>
+				<li><%= link_to "Customer login", login_path %></li>
+				<li><%= link_to "Employee login", employeelogin_path %></li>
 			<% else %>
 				<li><a>Logged in as <%= @current_customer.firstname %> <%= @current_customer.middlename %> 
 				<%= @current_customer.lastname %></a>

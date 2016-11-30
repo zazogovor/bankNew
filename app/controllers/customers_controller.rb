@@ -1,7 +1,8 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
   #before_action :authorise
-  before_action :authorise, except: [:new, :create]
+  #before_action :authorise, :except => [:new, :create, :index]
+  before_action :employeeauthorise, :only => [:index]
   #before_action :authorise, :except => :create
   #before_action :authorise, :except => :new
   #before_action :authorise, :except => :all_customers
@@ -10,7 +11,6 @@ class CustomersController < ApplicationController
   # GET /customers.json
   def index
     @customers = Customer.all
-	@customer = @current_customer
   end
   
   #Displays all customers of the bank. Will only be availible to the ADMIN
@@ -39,7 +39,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
+        format.html { redirect_to login_path, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }

@@ -32,18 +32,20 @@ class TransactionsController < ApplicationController
   
 	#Method to process a transaction in the database
 	#It is meant to deduct the transaction amount from sender, and add the amount to receiver
-	def processTransaction(sender, receiver, amount)
-		senderAccount = Account.find_by_id(sender)
-		receiverAccount = Account.find_by_id(receiver)
-		
-		senderAccount.balance -= amount
-		receiverAccount.balance += amount
-	end
+	#def processTransaction(sender, receiver, amount)
+	#	senderAccount = Account.find_by_id(sender)
+	#	receiverAccount = Account.find_by_id(receiver)
+	#	
+	#	senderAccount.balance -= amount
+	#	receiverAccount.balance += amount
+	#	@transaction.save
+	#end
 
   # POST /transactions
   # POST /transactions.json
 	def create
 		@transaction = Transaction.new(transaction_params)
+		@transaction.processTransaction(@transaction)
 
 		respond_to do |format|
 		  if @transaction.save
@@ -55,7 +57,7 @@ class TransactionsController < ApplicationController
 		  end
 		end
 		
-		processTransaction(@transaction.account_id, @transaction.transferee_id, @transaction.amount)
+		#processTransaction(@transaction.account_id, @transaction.transferee_id, @transaction.amount)
 	end
 
   # PATCH/PUT /transactions/1
