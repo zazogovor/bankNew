@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   get '/all_customers' => 'customers#all_customers'
   
   #get '/customers/:id', to 'customers#show', as: 'details'
+  
+  get 'search', :to => 'transactions#search'
 
   resources :cards
 

@@ -6,6 +6,20 @@
 
 	<div class = "container-fluid">
 		<div class ="row">
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<!-- Default panel contents -->
+					<div class="panel-heading">
+						<strong>Search by day</strong>
+					</div>
+					<div id = "search">
+						<%= render 'search' %>
+					</div>
+					</br>
+				</div>
+			</div>
+		</div>
+		<div class ="row">
 			<div class="col-md-3">
 				<div class="panel panel-default">
 					<!-- Default panel contents -->
@@ -26,6 +40,10 @@
 										<td><strong>Transferee:</strong></td>
 										<td><%= @transaction.transferAccount.customer.firstname %>
 											<%= @transaction.transferAccount.customer.lastname %></td>
+									</tr>
+									<tr>
+										<td><strong>Message:</strong></td>
+										<td><%= @transaction.message %></td>
 									</tr>
 									<tr>
 										<td><strong>Amount:</strong></td>

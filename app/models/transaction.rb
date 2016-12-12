@@ -18,4 +18,8 @@ class Transaction < ActiveRecord::Base
 		senderAccount.save
 		receiverAccount.save
 	end
+	
+	def self.search(query)
+		where("created_at LIKE ?", "%#{query}%")
+	end
 end

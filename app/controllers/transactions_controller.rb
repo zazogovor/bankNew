@@ -29,6 +29,16 @@ class TransactionsController < ApplicationController
   # GET /transactions/1/edit
 	def edit
 	end
+	
+	def search
+		@transactions = Transaction.search params[:query]
+		unless @transactions.empty?
+			render 'index'
+		else
+			flash[:notice] = 'No record matches that search'
+			render 'index'
+		end
+	end
   
 	#Method to process a transaction in the database
 	#It is meant to deduct the transaction amount from sender, and add the amount to receiver
@@ -92,6 +102,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:account_id, :transferee_id, :amount)
+      params.require(:transaction).permit(:account_id, :transferee_id, :amount, :message)
     end
 end

@@ -107,14 +107,24 @@
 								</tr>
 							</thead>
 							<tbody>
-								<% @account.transactions.each do |transaction| %>
-									<tr>
-										<td><%= transaction.id %></td>
-										<td><%= transaction.account_id %></td>
-										<td><%= transaction.transferee_id %></td>
-										<td><%= euro transaction.amount %></td>
-										<td><%= link_to 'Show', transaction %></td>
-									</tr>
+								<% @transactions.each do |transaction| %>
+									<% if transaction.account_id == @account.id %>
+										<tr>
+											<td><%= transaction.id %></td>
+											<td><%= transaction.account_id %></td>
+											<td><%= transaction.transferee_id %></td>
+											<td><%= euro transaction.amount %></td>
+											<td><%= link_to 'Show', transaction %></td>
+										</tr>
+									<% elsif transaction.transferee_id == @account.id %>
+										<tr>
+											<td><%= transaction.id %></td>
+											<td><%= transaction.account_id %></td>
+											<td><%= transaction.transferee_id %></td>
+											<td><%= euro transaction.amount %></td>
+											<td><%= link_to 'Show', transaction %></td>
+										</tr>
+									<% end %>
 								<% end %>
 							</tbody>
 						</table>

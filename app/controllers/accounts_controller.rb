@@ -16,6 +16,15 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
+	@transactions = []
+		@accounts = @current_customer.accounts
+		@accounts.each do |account|
+			account.transactions.each do |transaction|
+				@transactions << transaction
+			end
+		end
+		
+		@transactions.sort!
   end
 
   # GET /accounts/new

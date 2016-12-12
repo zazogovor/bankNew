@@ -19,6 +19,8 @@ class ApplicationController < ActionController::Base
 		end
 	end
 	
+	
+	
 	private
 		def store_location
 			session[:return_to] = request.fullpath
