@@ -2,7 +2,7 @@ class TransactionsController < ApplicationController
 
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
   before_action :employeeauthorise, :only => [:all_transactions]
-  before_action :authorise, :except => [:all_transactions]
+  before_action :authorise, :except => [:all_transactions, :search, :show]
   # GET /transactions
   # GET /transactions.json
 	def index
@@ -46,10 +46,19 @@ class TransactionsController < ApplicationController
 	def search
 		@transactions = Transaction.search params[:query]
 		unless @transactions.empty?
-			render 'index'
+			if signed_in?
+				render 'index'
+			else
+				render 'all_transactions'
+			end
 		else
-			flash[:notice] = 'No record matches that search'
-			render 'index'
+			if signed_in?
+				flash[:notice] = 'No record matches that search'
+				render 'index'
+			else
+				flash[:notice] = 'No record matches that search'
+				render 'all_transactions'
+			end
 		end
 	end
   

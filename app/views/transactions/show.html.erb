@@ -55,7 +55,11 @@
 				</div>
 			</div>
 		</div>
-		<%= link_to 'Back', transactions_path %>
+		<% if employeesigned_in? %>
+			<%= link_to 'Back', all_transactions_path %>
+		<% elsif signed_in? %>
+			<%= link_to 'Back', transactions_path %>
+		<% end %>
 	</div>
 
 

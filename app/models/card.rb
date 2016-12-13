@@ -7,4 +7,8 @@ class Card < ActiveRecord::Base
 	validates :security_number, presence: true
 	validates :security_number, length: { minimum: 6 }
 	validates :security_number, length: { maximum: 6 }
+	
+	def self.search(query)
+		where("lastname LIKE ?", "%#{query}%")
+	end
 end

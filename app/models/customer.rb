@@ -19,4 +19,7 @@ class Customer < ActiveRecord::Base
 	geocoded_by :address
 	after_validation :geocode, :if => :address_changed?
 	
+	def self.search(query)
+		where("lastname LIKE ?", "%#{query}%")
+	end
 end

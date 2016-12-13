@@ -108,7 +108,9 @@
 				</div>
 			</div>
 		</div>
-		<% if signed_in? %>
+		<% if employeesigned_in? %>
+			<%= link_to 'Edit details', edit_customer_path(@customer) %>
+		<% elsif signed_in? %>
 			<%= link_to 'New Account', new_account_path %> |
 			<%= link_to 'Edit your details', edit_customer_path(@current_customer) %>
 		<% else %>

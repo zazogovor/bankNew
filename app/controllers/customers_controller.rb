@@ -17,6 +17,17 @@ class CustomersController < ApplicationController
   def all_customers
 	@customers = Customer.all
   end
+  
+  def search
+	@customers = Customer.search params[:query]
+	
+	unless @customers.empty?
+		render 'index'
+	else
+		flash[:notice] = 'No customers found'
+		render 'index'
+	end
+  end
 
   # GET /customers/1
   # GET /customers/1.json

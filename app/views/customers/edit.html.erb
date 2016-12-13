@@ -2,5 +2,10 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @current_customer %> |
-<%= link_to 'Back', @current_customer %>
+<% if employeesigned_in? %>
+	<%= link_to 'Show', @customer %> |
+	<%= link_to 'Back', @customer %>
+<% elsif signed_in? %>
+	<%= link_to 'Show', @current_customer %> |
+	<%= link_to 'Back', @current_customer %>
+<% end %>

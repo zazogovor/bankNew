@@ -1,7 +1,7 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
   before_action :employeeauthorise, :only => [:all_cards]
-  before_action :authorise, :except => [:all_cards]
+  before_action :authorise, :except => [:all_cards, :show, :edit, :update, :search]
 
   # GET /cards
   # GET /cards.json
@@ -25,6 +25,25 @@ class CardsController < ApplicationController
 		end
 	end
   end
+  
+	def search
+		@cards = Card.search params[:query]
+		unless @cards.empty?
+			if signed_in?
+				render 'index'
+			else
+				render 'all_cards'
+			end
+		else
+			if signed_in?
+				flash[:notice] = 'No record matches that search'
+				render 'index'
+			else
+				flash[:notice] = 'No record matches that search'
+				render 'all_cards'
+			end
+		end
+	end
 
   # GET /cards/1
   # GET /cards/1.json

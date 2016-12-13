@@ -1,7 +1,7 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
   before_action :employeeauthorise, :only => [:all_accounts]
-  before_action :authorise, :except => [:all_accounts]
+  before_action :authorise, :except => [:all_accounts, :show, :edit, :update, :search]
   
 
   # GET /accounts
@@ -14,6 +14,25 @@ class AccountsController < ApplicationController
   def all_accounts
 	@accounts = Account.all
   end
+  
+	def search
+		@accounts = Account.search params[:query]
+		unless @accounts.empty?
+			if signed_in?
+				render 'index'
+			else
+				render 'all_accounts'
+			end
+		else
+			if signed_in?
+				flash[:notice] = 'No record matches that search'
+				render 'index'
+			else
+				flash[:notice] = 'No record matches that search'
+				render 'all_accounts'
+			end
+		end
+	end
 
   def test
 	

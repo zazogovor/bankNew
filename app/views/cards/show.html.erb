@@ -86,4 +86,8 @@
 <br>
 
 <%= link_to 'Edit', edit_card_path(@card) %> |
-<%= link_to 'Back', cards_path %>
+<% if employeesigned_in? %>
+	<%= link_to 'Back', all_cards_path %>
+<% elsif signed_in? %>
+	<%= link_to 'Back', cards_path %>
+<% end %>

@@ -134,8 +134,12 @@
 		</div>
 		<%= link_to 'New Card', new_card_path %> |
 		<%= link_to 'New Transaction', new_transaction_path %> |
-		<%= link_to 'Edit', edit_account_path(@account) %> |
-		<%= link_to 'Back', accounts_path %>
+		<% if employeesigned_in? %>
+			<%= link_to 'Edit', edit_account_path(@account) %> |
+			<%= link_to 'Back', all_accounts_path %>
+		<% elsif signed_in? %>
+			<%= link_to 'Back', accounts_path %>
+		<% end %>
 	</div>
 
 </body>
