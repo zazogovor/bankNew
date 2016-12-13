@@ -39,7 +39,7 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-		Usermailer.welcome(@customer).deliver_now
+		Usermailer.welcome(@customer).deliver
         format.html { redirect_to login_path, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
