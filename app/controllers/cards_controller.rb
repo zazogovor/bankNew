@@ -1,6 +1,7 @@
 class CardsController < ApplicationController
   before_action :set_card, only: [:show, :edit, :update, :destroy]
-  before_action :authorise
+  before_action :employeeauthorise, :only => [:all_cards]
+  before_action :authorise, :except => [:all_cards]
 
   # GET /cards
   # GET /cards.json
@@ -16,7 +17,13 @@ class CardsController < ApplicationController
   
   #Displays all cards
   def all_cards
-	@allCards = Card.all
+	@cards = []
+	@accounts = Account.all
+	@accounts.each do |account|
+		account.cards.each do |card|
+			@cards << card                    #this stores each 'card' in @cards
+		end
+	end
   end
 
   # GET /cards/1

@@ -46,39 +46,3 @@
 </body>
 </html>
 
-<!-- Trying to show all details of an account based on dopbox input -->
-<!-- Need to make a JavaScript script for this to work -->
-<!--
-<%= form_for(@current_customer) do |f| %>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<div class="field">
-				<strong>Account number:</strong>
-				<%= f.collection_select :id, @current_customer.accounts, :id, :id%>
-				<strong>Account type:</strong>
-				<%= content_tag('span', "", id: 'AccountType') %>
-			</div>
-		</div>
-		<table class="table">
-			<thead>
-				<tr>
-					
-				</tr>
-			</thead>
-			<tbody>
-				<% @accounts.each do |account| %>
-					<tr>
-						<td><%= account.id %></td>
-						<td><%= account.account_type %></td>
-						<td><%= euro account.balance %></td>
-						<td><%= link_to 'Show', account %></td>
-						<td><%= link_to 'Edit', edit_account_path(account) %></td>
-						<td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-					</tr>
-				<% end %>
-			</tbody>
-		</table>
-	</div>
-<% end %>
--->
-

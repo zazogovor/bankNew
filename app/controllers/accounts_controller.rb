@@ -1,13 +1,18 @@
 class AccountsController < ApplicationController
   before_action :set_account, only: [:show, :edit, :update, :destroy]
-  before_action :authorise
+  before_action :employeeauthorise, :only => [:all_accounts]
+  before_action :authorise, :except => [:all_accounts]
   
 
   # GET /accounts
   # GET /accounts.json
   def index
 	#@accounts = Account.all
-    @accounts = @current_customer.accounts
+	@accounts = @current_customer.accounts
+  end
+  
+  def all_accounts
+	@accounts = Account.all
   end
 
   def test
@@ -16,7 +21,8 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-	@transactions = []
+	if signed_in?
+		@transactions = []
 		@accounts = @current_customer.accounts
 		@accounts.each do |account|
 			account.transactions.each do |transaction|
@@ -25,6 +31,18 @@ class AccountsController < ApplicationController
 		end
 		
 		@transactions.sort!
+	else
+		@transactions = []
+		@accounts = @accounts = Account.all
+		@accounts.each do |account|
+			account.transactions.each do |transaction|
+				@transactions << transaction
+			end
+		end
+		
+		@transactions.sort!
+	end
+		
   end
 
   # GET /accounts/new

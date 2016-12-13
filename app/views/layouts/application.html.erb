@@ -48,7 +48,12 @@
 			<% end %>
 			<li><%= mail_to "c12437908@mydit.ie", "Contact us" %></li>
 			</br>
-			<% if signed_in? %>
+			<% if employeesigned_in? %>
+				<li><%= link_to "All Customer", customers_path %></li>
+				<li><%= link_to "All Accounts", all_accounts_path %></li>
+				<li><%= link_to "All Cards", all_cards_path %></li>
+				<li><%= link_to "All Transactions", all_transactions_path %></li>
+			<% elsif signed_in? %>
 				<li><%= link_to "Your details", @current_customer %></li>
 				<li><%= link_to "Accounts", accounts_path %></li>
 				<li><%= link_to "Cards", cards_path %></li>
@@ -67,8 +72,8 @@
 
 	<%= yield %>
 	
-	<nav class="navbar navbar-default navbar-fluid-bottom">
-		<div class="container">
+	<footer class = "footer">
+		<div class="container-fluid">
 			<footer class="container-fluid text-center">
 				<a href="#" title="To Top">
 					<span class="glyphicon glyphicon-chevron-up"></span>
@@ -77,6 +82,6 @@
 				<a href="http://www.github.com/zazogovor/" title="Visit my github page">http://www.github.com/zazogovor/</a>
 			</footer>
 		</div>
-	</nav>
+	</footer>
 </body>
 </html>

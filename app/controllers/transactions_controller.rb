@@ -1,12 +1,25 @@
 class TransactionsController < ApplicationController
 
   before_action :set_transaction, only: [:show, :edit, :update, :destroy]
-  before_action :authorise
+  before_action :employeeauthorise, :only => [:all_transactions]
+  before_action :authorise, :except => [:all_transactions]
   # GET /transactions
   # GET /transactions.json
 	def index
 		@transactions = []
 		@accounts = @current_customer.accounts
+		@accounts.each do |account|
+			account.transactions.each do |transaction|
+				@transactions << transaction
+			end
+		end
+		
+		@transactions.sort!
+	end
+	
+	def all_transactions
+		@transactions = []
+		@accounts = Account.all
 		@accounts.each do |account|
 			account.transactions.each do |transaction|
 				@transactions << transaction

@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   get 'pages/about'
   
   get '/all_customers' => 'customers#all_customers'
+  get '/all_accounts' => 'accounts#all_accounts'
+  get '/all_cards' => 'cards#all_cards'
+  get '/all_transactions' => 'transactions#all_transactions'
   
   #get '/customers/:id', to 'customers#show', as: 'details'
   
